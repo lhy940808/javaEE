@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                                        http://www.springframework.org/schema/beans
+                                        http://www.springframework.org/schema/beans/spring-beans.xsd  "  >
+    <!--第一种：利用类的构造参数来实现类的创建-->
+    <bean id="user" class="entity.UserService" scope="prototype"></bean>
+    <!--第二种：利用静态工厂来创建类-->
+    <bean id="bean2" class = "beansManage.StaticFactory" factory-method="getUser" ></bean>
+    <!--第三种：利用实例工厂来创建对象-->
+    <!--首先，创建出工厂的实例-->
+    <!--然后，创建类-->
+    <bean id="beans3Factory" class="beansManage.InstanceFactory" ></bean>
+    <bean id="beans3" factory-bean="beans3Factory" factory-method="getUser"></bean>
+
+    <!--下面的配置是关于属性注入的两种实现方式-->
+    <!--方法一：使用类的有参构造器来实现-->
+    <bean id="property1" class ="Property.constructor">
+        <constructor-arg name="name" value="constructor name"></constructor-arg>
+    </bean>
+
+    <!--方法二：使用set方法实现属性注入-->
+    <bean id="property2" class = "Property.setter">
+        <property value="setter name" name="name"></property>
+    </bean>
+</beans>
