@@ -25,4 +25,52 @@
     <bean id="property2" class = "Property.setter">
         <property value="setter name" name="name"></property>
     </bean>
+
+    <!--下面是介绍注入对象类型属性的方法-->
+    <!--这里举个例子，service中想用dao的方法，那么service中将dao作为属性，然后用set方法给dao赋值-->
+    <!--第一：给dao实例化-->
+    <bean id="dao" class="Property.Dao"></bean>
+    <!--第二，实例化service，也给dao用set方法赋值-->
+    <bean id="service" class="Property.Service" >
+       <!--
+        这里给dao使用set方法赋值
+        这里name属性跟一般的基本类型属性含义一样是属性名称，但赋值不再使用value，而是使用ref，值为dao的bean标签的id
+        -->
+        <property name="dao" ref="dao"></property>
+    </bean>
+    <!--下面是复杂对象类型的注入实现方式-->
+    <bean id="complex" class="Property.ComplexObeject">
+        <!--数组-->
+        <property name="arr">
+            <list>
+                <value>arr1</value>
+                <value>arr2</value>
+                <value>arr3</value>
+            </list>
+        </property>
+        <!--List-->
+        <property name="list">
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+                <value>list2</value>
+            </list>
+        </property>
+        <!--Map-->
+        <property name="map">
+            <map>
+                <entry key="m1" value="v1"></entry>
+                <entry key="m2" value="v2"></entry>
+            </map>
+        </property>
+        <!--Properties-->
+        <property name="property">
+            <props>
+                <prop key="p1">pp</prop>
+                <prop key="p2">pp2</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
+
+
