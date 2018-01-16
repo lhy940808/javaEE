@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                                   ">
+    <!--这里演示注解的方式实现aop操作-->
+
+    <!--首先开启aop-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    <!--然后创建增强类和被增强类的实例-->
+    <bean id="user" class="cn.web.anno.User"></bean>
+    <bean id="myUser" class="cn.web.anno.MyUser"></bean>
+</beans>

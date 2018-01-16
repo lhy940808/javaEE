@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--开始注解扫描
+        会到包里面扫描类、方法、属性  上面是否有注释
+    -->
+    <context:component-scan base-package=" cn.web" ></context:component-scan>
+
+    <!--接下来演示配置文件和注解混合使用实现实例创建和属性注入的方式-->
+
+    <!--1 首先使用配置文件创建实例-->
+    <bean id="mix" class="cn.web.anno.MixWay"></bean>
+    <bean id="book1" class="cn.web.anno.Book"></bean>
+</beans>

@@ -1,0 +1,23 @@
+重点记住idea中跟eclipse不一样的地方，就是
+idea中的new project相当于eclipse的new worksplace
+idea中的new module相当于eclipse的new project
+
+下面说idea的创建步骤
+1、new project 创建工作路径（创建java项目就好）
+2、在新建好的项目名称上右键，new module，创建web 项目，假如叫demo
+3、这是生成的项目目录结构是src、web，跟eclipse不一样 ，故需要新建目录，做法如下：
+    a、在web中新建WEB-INF目录
+    b、在WEB-INF中新建lib目录（用来存放jar包）
+    c、在WEB-INF中新建classes目录（用于存放项目生成的字节码）
+ 4、新建好以上目录后，就要配置以上目录的功能；
+    a、file-projext structure 中，左边找到module，右边找到demo（项目名，设置各个属性
+    b、找到source，将language level 设置为8
+    c，找到paths，使用Use module 。。。重新选择字节码的存放位置，两个都选择刚才创建的classes目录
+    d、找到dependence，点击右边的加号，jar or directory 选择刚才创建的lib目录
+    e、点击ok
+  5、部署好tomcat服务器，如果没有配置tomcat环境，首先配置tomcat换将，选择run-edit configuration 在左边搜索tomcat，选择好本机tomcat
+  安装的目录，取好名字，然后茎demo'（项目名）部署到tomcat上，点击+，选择arfact，配置好访问路径
+
+  这里idea跟eclipse直接将项目部署到tomcat的webapps目录不一样，idea有自己的tomcat目录一般在（C:\Users\Administrator\.IntelliJIdea2017.3\system\tomcat\Unnamed_javaEE\conf\Catalina\localhost）
+
+  idea是将tomcat中的lib和bin没拷贝过来，其他目录拷到tomcat这个目录下，然后自己在\Catalina\localhost目录下生成xml配置文件，从而来访问项目

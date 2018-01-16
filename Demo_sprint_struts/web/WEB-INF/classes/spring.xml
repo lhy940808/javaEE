@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--这是配置spring整合web项目的完整演示，action中要引用service，service要引用dao-->
+    <!--这里用spring实现service引用dao中的东西-->
+    <bean id="userDao" class="cn.web.dao.UserDao"></bean>
+    <bean id="userService" class="cn.web.service.UserService">
+        <property name="dao" ref="userDao"></property>
+    </bean>
+</beans>

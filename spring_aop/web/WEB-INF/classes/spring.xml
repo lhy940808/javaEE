@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                                   ">
+    <!--下面需要实现aop的基本操作，也就是用aspectj的aop操作-->
+   <!--1 先去src下创建两个类，分别是增强类和被增强类-->
+
+    <!--2 然后实例化这两个类-->
+    <bean id="book" class="cn.web.aop.Book"></bean>
+    <bean id="myBook" class="cn.web.aop.MyBook"></bean>
+
+    <!--3 配置aop操作-->
+    <aop:config>
+        <!--3.1 配置切入点(也就是被增强类中那些要被增强(扩展)的方法) 这个方法配置在expression属性中，如book类中的add方法-->
+                <aop:pointcut expression="execution(* cn.web.aop.Book.add(..))" id="pointcut1"></aop:pointcut>
+
+        <!--3.2 配置切面（将增强（扩展逻辑）应用到切入点的过程）
+                ref属性：表示增强类的实例id
+        -->
+                <aop:aspect ref="myBook">
+                    <!--配置增强类型（前置、后置、异常、环绕、最终）
+                        method:表示增强类中的增强逻辑所在的方法
+                        pointcut-cut：表示上面配置的切人点
+                    -->
+                    <aop:before method="before1" pointcut-ref="pointcut1" ></aop:before>
+                    <aop:after-returning method="after" pointcut-ref="pointcut1"></aop:after-returning>
+                    <aop:around method="beforeAndAfter" pointcut-ref="pointcut1"></aop:around>
+                    <aop:after-throwing method="exception" pointcut-ref="pointcut1"></aop:after-throwing>
+                    <!--这个不是为了测试异常通知，而是看aop:after标签是啥功能-->
+                    <aop:after method="exception" pointcut-ref="pointcut1"></aop:after>
+                </aop:aspect>
+
+    </aop:config>
+</beans>

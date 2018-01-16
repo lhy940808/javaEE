@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Demo_sprint_struts/Demo_spring_struts.iml" filepath="$PROJECT_DIR$/Demo_sprint_struts/Demo_spring_struts.iml" />
       <module fileurl="file://$PROJECT_DIR$/firstWeb/firstWeb.iml" filepath="$PROJECT_DIR$/firstWeb/firstWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaEE.iml" filepath="$PROJECT_DIR$/javaEE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdbc_template/jdbc_template.iml" filepath="$PROJECT_DIR$/jdbc_template/jdbc_template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_aop/spring_aop.iml" filepath="$PROJECT_DIR$/spring_aop/spring_aop.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring_ioc/spring_ioc.iml" filepath="$PROJECT_DIR$/spring_ioc/spring_ioc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_ioc_anno/spring_ioc_anno.iml" filepath="$PROJECT_DIR$/spring_ioc_anno/spring_ioc_anno.iml" />
     </modules>
   </component>
 </project>
