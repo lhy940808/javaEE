@@ -1,0 +1,3 @@
+#这是spring中关于持久层所需要的框架
+封装jdbc的框架 jdbcTemplate，使用这个框架实现crud的操作
+除了基础jar包，于此相关的jar是spring-jdbc和spring-rx（tx表示事务）
