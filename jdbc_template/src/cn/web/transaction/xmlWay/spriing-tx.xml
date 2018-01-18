@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--配置数据库的连接池信息-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--注入属性，设置数据库信息-->
+        <property name="driverClass" value="org.gjt.mm.mysql.Driver"></property>
+        <property name="user" value="root"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring?characterEncoding=UTF-8"></property>
+        <property name="password" value="root"></property>
+    </bean>
+
+
+    <!--事务管理的实现方式一：声明式的事务管理，xml配置文件方式-->
+    <!--第一步：配置事务管理器-->
+    <bean id = "transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源信息，也就是要给哪个数据库进行加事务-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--第二步：配置事务的增强 也就是给相应的方法上加上事务管理-->
+    <tx:advice id="txadvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--设置进行事务操作的方法匹配原则 account* 表示以account开头的方法加上事务 propagation表示事务隔离级别-->
+            <tx:method name="account*" propagation="REQUIRED"/>
+        </tx:attributes>
+
+    </tx:advice>
+
+    <!--第三步：配置切面， 也就是注入事务的过程-->
+    <aop:config>
+        <!--配置切入点，也就是要扩展的方法 expression表示要扩展方法所在类路径，以下表示service类中的所有方法-->
+        <aop:pointcut  id="pointcut" expression="execution(* cn.web.transaction.xmlWay.Service.*(..))"></aop:pointcut>
+        <!--配置切面，注入的过程-->
+        <aop:advisor advice-ref="txadvice" pointcut-ref="pointcut"></aop:advisor>
+    </aop:config>
+
+
+    <!--配置service和dao的实例创建-->
+    <bean id="service" class="cn.web.transaction.xmlWay.Service">
+        <!--注入属性-->
+        <property name="dao" ref="dao"></property>
+    </bean>
+
+    <bean id="dao" class="cn.web.transaction.xmlWay.Dao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+
+</beans>
